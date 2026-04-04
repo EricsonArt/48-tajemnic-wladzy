@@ -38,7 +38,7 @@
     "sku": "48TW-001",
     "brand": {
       "@type": "Brand",
-      "name": "Eryk Mastermind"
+      "name": "[NAZWA MARKI]"
     },
     "offers": {
       "@type": "Offer",
@@ -48,7 +48,7 @@
       "availability": "https://schema.org/InStock",
       "seller": {
         "@type": "Organization",
-        "name": "Eryk Mastermind"
+        "name": "[NAZWA MARKI]"
       }
     },
     "aggregateRating": {
@@ -1367,6 +1367,59 @@
     }
 
     /* ============================================
+       FLOATING CTA BUTTON (all devices)
+    ============================================ */
+    .floating-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 8000;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .floating-cta.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .floating-cta a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 16px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(255, 0, 0, 0.5), 0 2px 8px rgba(0,0,0,0.4);
+      animation: pulse-glow 2.5s ease-in-out infinite;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .floating-cta a:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+      .floating-cta {
+        bottom: 80px; /* above sticky bar */
+        right: 16px;
+      }
+      .floating-cta a {
+        font-size: 0.85rem;
+        padding: 14px 22px;
+      }
+    }
+
+    /* ============================================
        EXIT INTENT POPUP
     ============================================ */
     #exit-popup {
@@ -1548,7 +1601,7 @@
               <div class="ebook-divider"></div>
               <div class="ebook-title-line">Tajemnic<br>Władzy</div>
               <div class="ebook-subtitle-line">Techniki Liderów Gotowe do Użycia</div>
-              <div class="ebook-author">Eryk Mastermind</div>
+              <div class="ebook-author">[NAZWA MARKI]</div>
             </div>
           </div>
         </div>
@@ -2043,7 +2096,7 @@
         </div>
 
         <div class="footer-meta fade-in fade-in-delay-3" role="contentinfo">
-          <span>© 2026 Eryk Mastermind</span>
+          <span>© 2026 [NAZWA MARKI]</span>
           <a href="/polityka-prywatnosci">Polityka prywatności</a>
           <a href="/regulamin">Regulamin</a>
           <a href="mailto:kontakt@erykmastermind.pl">Kontakt</a>
@@ -2067,6 +2120,13 @@
       rel="noopener"
     >
       🔥 Chcę to – 47zł
+    </a>
+  </div>
+
+  <!-- Floating CTA Button (all devices) -->
+  <div class="floating-cta" id="floating-cta">
+    <a href="#pricing" aria-label="Przejdź do zakupu">
+      🔥 47zł — Kup Teraz
     </a>
   </div>
 
@@ -2384,12 +2444,26 @@
       ────────────────────────────────────────── */
       (function initScrollProgress() {
         var bar = document.getElementById('scroll-progress');
+        var floatingCta = document.getElementById('floating-cta');
+        var hero = document.getElementById('hero');
         if (!bar) return;
+
+        var heroHeight = hero ? hero.offsetHeight : 600;
+
         window.addEventListener('scroll', function () {
           var scrollTop = window.scrollY || document.documentElement.scrollTop;
           var docHeight = document.documentElement.scrollHeight - window.innerHeight;
           var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
           bar.style.width = pct + '%';
+
+          // Show floating CTA after hero
+          if (floatingCta) {
+            if (scrollTop > heroHeight) {
+              floatingCta.classList.add('visible');
+            } else {
+              floatingCta.classList.remove('visible');
+            }
+          }
         }, { passive: true });
       })();
 

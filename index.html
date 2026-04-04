@@ -80,6 +80,31 @@
 
   <style>
     /* ============================================
+       SCROLL PROGRESS BAR
+    ============================================ */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      z-index: 10000;
+      transition: width 0.1s linear;
+    }
+
+    /* ============================================
+       GOLD SECTION DIVIDERS
+    ============================================ */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border: none;
+      margin: 0;
+    }
+
+    /* ============================================
        CSS RESET & BASE
     ============================================ */
     *, *::before, *::after {
@@ -91,6 +116,7 @@
     :root {
       --black: #000000;
       --red: #FF0000;
+      --red-accessible: #FF3333;
       --red-dark: #cc0000;
       --red-dim: rgba(255, 0, 0, 0.15);
       --gold: #FFD700;
@@ -1489,6 +1515,9 @@
 </head>
 <body>
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
   <!-- =============================================
        HERO SECTION
   ============================================= -->
@@ -1526,10 +1555,10 @@
 
         <!-- Countdown -->
         <div class="countdown-wrap fade-in fade-in-delay-3">
-          <div class="countdown-label" aria-live="polite">Oferta wygasa za:</div>
+          <div class="countdown-label" aria-live="polite">Twoja cena 47zł wygasa za:</div>
           <div class="countdown-timer" role="timer" aria-label="Odliczanie do końca oferty">
             <div class="countdown-unit">
-              <div class="countdown-box" id="cd-hours" aria-label="godziny">23</div>
+              <div class="countdown-box" id="cd-hours" aria-label="godziny">00</div>
               <div class="countdown-unit-label">godz</div>
             </div>
             <div class="countdown-sep" aria-hidden="true">:</div>
@@ -1554,7 +1583,7 @@
             aria-label="Pobierz e-book 48 Tajemnic Władzy za 47 złotych"
             rel="noopener"
           >
-            🔥 Pobierz TERAZ za 47zł (zamiast 97zł)
+            🔥 CHCĘ TO za 47zł (zamiast 97zł)
           </a>
           <div class="social-count">
             Już <strong>1,247 osób</strong> pobrało w tym tygodniu
@@ -1580,6 +1609,7 @@
       </div>
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        PROBLEM SECTION
@@ -1633,6 +1663,7 @@
 
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        SOLUTION SECTION
@@ -1711,6 +1742,7 @@
 
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        SOCIAL PROOF SECTION
@@ -1733,7 +1765,7 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar" aria-hidden="true">K</div>
             <div>
-              <div class="testimonial-name">Kuba</div>
+              <div class="testimonial-name">Kuba K., Warszawa</div>
               <div class="testimonial-role">29 lat · CEO startupu</div>
             </div>
           </div>
@@ -1747,7 +1779,7 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar" aria-hidden="true">M</div>
             <div>
-              <div class="testimonial-name">Marek</div>
+              <div class="testimonial-name">Marek W., Wrocław</div>
               <div class="testimonial-role">35 lat · Programista</div>
             </div>
           </div>
@@ -1761,7 +1793,7 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar" aria-hidden="true">A</div>
             <div>
-              <div class="testimonial-name">Anna</div>
+              <div class="testimonial-name">Anna S., Kraków</div>
               <div class="testimonial-role">27 lat · Marketing</div>
             </div>
           </div>
@@ -1775,7 +1807,7 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar" aria-hidden="true">T</div>
             <div>
-              <div class="testimonial-name">Tomek</div>
+              <div class="testimonial-name">Tomek P., Poznań</div>
               <div class="testimonial-role">42 lata · Handlowiec</div>
             </div>
           </div>
@@ -1789,7 +1821,7 @@
           <div class="testimonial-author">
             <div class="testimonial-avatar" aria-hidden="true">O</div>
             <div>
-              <div class="testimonial-name">Ola</div>
+              <div class="testimonial-name">Ola M., Gdańsk</div>
               <div class="testimonial-role">24 lata · Influencerka</div>
             </div>
           </div>
@@ -1815,6 +1847,7 @@
 
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        PRICE & SCARCITY SECTION
@@ -1867,7 +1900,7 @@
             aria-label="Zabezpiecz swoją kopię e-booka za 47 złotych"
             rel="noopener"
           >
-            🔒 ZABEZPIECZ SWOJĄ KOPIĘ →
+            🔒 TAK, CHCĘ TĘ WIEDZĘ →
           </a>
         </div>
 
@@ -1883,6 +1916,7 @@
 
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        FAQ SECTION
@@ -1969,6 +2003,7 @@
 
     </div>
   </section>
+  <hr class="section-divider" aria-hidden="true">
 
   <!-- =============================================
        FOOTER CTA SECTION
@@ -2031,7 +2066,7 @@
       aria-label="Kup teraz za 47 złotych"
       rel="noopener"
     >
-      🔥 Kup Teraz – 47zł
+      🔥 Chcę to – 47zł
     </a>
   </div>
 
@@ -2095,14 +2130,13 @@
       ────────────────────────────────────────── */
       (function initCountdown() {
         var STORAGE_KEY = '48tw_countdown_end';
-        var DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+        var DURATION_MS = 15 * 60 * 1000; // 15 minutes — session-based scarcity
 
         var storedEnd = localStorage.getItem(STORAGE_KEY);
         var endTime;
 
         if (storedEnd) {
           endTime = parseInt(storedEnd, 10);
-          // If the stored end time has passed, create a new one
           if (Date.now() >= endTime) {
             endTime = Date.now() + DURATION_MS;
             localStorage.setItem(STORAGE_KEY, endTime.toString());
@@ -2269,10 +2303,15 @@
         if (isDesktop) {
           document.addEventListener('mouseleave', onMouseLeave);
         } else {
-          // Mobile: show after 45 seconds
-          mobileTimer = setTimeout(function () {
-            showPopup();
-          }, 45000);
+          // Mobile: show at 90% scroll depth (more natural than timer)
+          window.addEventListener('scroll', function onMobileScroll() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            if (docHeight > 0 && (scrollTop / docHeight) >= 0.9) {
+              showPopup();
+              window.removeEventListener('scroll', onMobileScroll);
+            }
+          }, { passive: true });
         }
 
         // Close events
@@ -2339,6 +2378,20 @@
           }
         });
       });
+
+      /* ──────────────────────────────────────────
+         9. SCROLL PROGRESS BAR (red-to-gold line at top)
+      ────────────────────────────────────────── */
+      (function initScrollProgress() {
+        var bar = document.getElementById('scroll-progress');
+        if (!bar) return;
+        window.addEventListener('scroll', function () {
+          var scrollTop = window.scrollY || document.documentElement.scrollTop;
+          var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          bar.style.width = pct + '%';
+        }, { passive: true });
+      })();
 
     })();
   </script>

@@ -189,91 +189,105 @@
       transform: rotateY(-15deg) rotateX(2deg);
     }
 
-    /* Front cover */
+    /* Front cover — dark background + mask image + red title */
     .book-cover {
       position: absolute;
       inset: 0;
       border-radius: 0 6px 6px 0;
       overflow: hidden;
-      background: #111;
+      background: linear-gradient(170deg, #2a2a2a 0%, #1a1a1a 30%, #111 70%, #0a0a0a 100%);
       z-index: 3;
       box-shadow:
         5px 5px 20px rgba(0,0,0,0.3),
         inset 0 0 0 1px rgba(255,255,255,0.05);
     }
 
-    .book-cover img {
+    /* Stone/concrete texture overlay */
+    .book-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 80%, rgba(40,40,40,0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 30% 20%, rgba(50,50,50,0.4) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 30%, rgba(35,35,35,0.3) 0%, transparent 45%);
+      z-index: 1;
+    }
+
+    /* Mask image — positioned in bottom-right area */
+    .book-cover-img {
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      width: 85%;
+      height: 60%;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .book-cover-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.5) 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 20%, rgba(0,0,0,0.5) 60%, transparent 100%);
     }
 
-    .book-cover-overlay {
+    /* Fog/smoke at bottom */
+    .book-cover::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30%;
+      background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 100%);
+      z-index: 3;
+    }
+
+    /* Text overlay */
+    .book-cover-text {
       position: absolute;
       inset: 0;
+      z-index: 4;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
-      background: linear-gradient(
-        180deg,
-        rgba(0,0,0,0.1) 0%,
-        rgba(0,0,0,0.3) 35%,
-        rgba(0,0,0,0.55) 100%
-      );
-      z-index: 4;
+      padding: 16px 14px;
     }
 
-    .book-num {
+    .book-brand {
       font-family: var(--font);
-      font-weight: 800;
-      font-size: 5rem;
-      color: #DC143C;
-      line-height: 1;
-      text-shadow: 0 3px 16px rgba(0,0,0,0.6);
-    }
-
-    .book-line {
-      width: 55%;
-      height: 2px;
-      background: linear-gradient(to right, transparent, rgba(220,20,60,0.6), transparent);
-      margin: 12px 0;
-    }
-
-    .book-ttl {
-      font-family: var(--font);
-      font-weight: 800;
-      font-size: 0.78rem;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      text-align: center;
-      line-height: 1.7;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-    }
-
-    .book-sub {
-      font-family: var(--font);
-      font-size: 0.5rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.5);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-top: 12px;
-      text-align: center;
-    }
-
-    .book-auth {
-      position: absolute;
-      bottom: 18px;
-      font-size: 0.48rem;
+      font-size: 0.42rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      z-index: 5;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .book-title-big {
+      font-family: var(--font);
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: #DC143C;
+      text-transform: uppercase;
+      line-height: 1.15;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    .book-subtitle {
+      font-family: var(--font);
+      font-size: 0.42rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      margin-top: 10px;
     }
 
     /* Spine — thick like a real book */
@@ -1122,13 +1136,13 @@
           <div class="book-scene">
             <div class="book" role="img" aria-label="Okladka e-booka 24 Tajemnice Manipulacji">
               <div class="book-cover">
-                <img src="cover.jpg" alt="24 Tajemnice Manipulacji" loading="eager" />
-                <div class="book-cover-overlay">
-                  <div class="book-num">24</div>
-                  <div class="book-line"></div>
-                  <div class="book-ttl">Tajemnice<br>Manipulacji</div>
-                  <div class="book-sub">Techniki gotowe do uzycia</div>
-                  <div class="book-auth">@mindtriki</div>
+                <div class="book-cover-img">
+                  <img src="cover.jpg" alt="" loading="eager" />
+                </div>
+                <div class="book-cover-text">
+                  <div class="book-brand">@mindtriki</div>
+                  <div class="book-title-big">24<br>Tajemnice<br>Manipulacji</div>
+                  <div class="book-subtitle">Teraz to Ty<br>rozdajesz karty</div>
                 </div>
               </div>
               <div class="book-spine"></div>

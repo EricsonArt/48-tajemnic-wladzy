@@ -73,16 +73,16 @@ def blend_mask_image(bg, mask_path):
     """Blend mask face image into the lower portion of the background."""
     mask_img = Image.open(mask_path).convert("RGB")
 
-    # Keep mask visible — only slightly darken, boost contrast and saturation
+    # Make mask BRIGHT and vivid — face and red eyes must be clearly visible
     enhancer = ImageEnhance.Brightness(mask_img)
-    mask_img = enhancer.enhance(1.0)
-    enhancer = ImageEnhance.Contrast(mask_img)
     mask_img = enhancer.enhance(1.4)
+    enhancer = ImageEnhance.Contrast(mask_img)
+    mask_img = enhancer.enhance(1.5)
     enhancer = ImageEnhance.Color(mask_img)
-    mask_img = enhancer.enhance(1.8)
+    mask_img = enhancer.enhance(2.0)
 
-    # Resize mask to fill lower ~65% of cover
-    target_h = int(H * 0.65)
+    # Resize mask to fill lower ~75% of cover — bigger face
+    target_h = int(H * 0.75)
     target_w = W
     mask_ratio = mask_img.width / mask_img.height
     if mask_ratio > target_w / target_h:
@@ -148,11 +148,11 @@ def blend_mask_image(bg, mask_path):
     gd = ImageDraw.Draw(glow)
     glow_cx = W // 2
     glow_cy = y_offset + int(new_h * 0.35)
-    # Stronger red glow for the eyes area
-    gd.ellipse([glow_cx - 150, glow_cy - 80, glow_cx + 150, glow_cy + 80],
-               fill=(120, 8, 20))
-    glow = glow.filter(ImageFilter.GaussianBlur(radius=45))
-    bg = Image.blend(bg, glow, 0.25)
+    # Strong red glow for the eyes area
+    gd.ellipse([glow_cx - 180, glow_cy - 100, glow_cx + 180, glow_cy + 100],
+               fill=(160, 10, 25))
+    glow = glow.filter(ImageFilter.GaussianBlur(radius=50))
+    bg = Image.blend(bg, glow, 0.3)
 
     return bg
 
@@ -173,8 +173,8 @@ def add_fog(img):
 
     fog = fog.filter(ImageFilter.GaussianBlur(radius=40))
 
-    # Blend fog
-    img = Image.blend(img, fog, 0.3)
+    # Blend fog — subtle, don't darken the face
+    img = Image.blend(img, fog, 0.15)
 
     # Bottom gradient darken
     gradient = Image.new("RGBA", (W, H), (0, 0, 0, 0))

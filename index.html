@@ -866,6 +866,120 @@
       color: rgba(255,255,255,0.2);
     }
 
+    /* ============ MORE EBOOKS ============ */
+    .ebooks-section {
+      background: var(--bg-warm);
+      padding: 80px 0;
+    }
+
+    .ebooks-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .ebook-card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ebook-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    .ebook-card-img {
+      width: 100%;
+      aspect-ratio: 864 / 1184;
+      object-fit: cover;
+    }
+
+    .ebook-card-body {
+      padding: 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ebook-card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .ebook-card-tag.red { background: var(--red-light); color: var(--red); }
+    .ebook-card-tag.blue { background: #eef6ff; color: #2980b9; }
+
+    .ebook-card-body h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .ebook-card-body p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+
+    .ebook-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .ebook-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .ebook-price span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .ebook-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .ebook-btn:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    .ebook-btn.blue {
+      background: #2980b9;
+    }
+    .ebook-btn.blue:hover {
+      background: #1f6da0;
+    }
+
     /* ============ RESPONSIVE ============ */
     @media (max-width: 720px) {
       .hero-grid {
@@ -886,6 +1000,7 @@
       .inside-grid { grid-template-columns: 1fr; }
       .compare-grid { grid-template-columns: 1fr; }
       .reviews-grid { grid-template-columns: 1fr; }
+      .ebooks-grid { grid-template-columns: 1fr; }
 
       .section { padding: 56px 0; }
       .hero { padding: 48px 0 56px; }
@@ -1199,6 +1314,47 @@
         <div class="faq-item">
           <button class="faq-q" aria-expanded="false">Czy jest gwarancja zwrotu? <span class="faq-icon">+</span></button>
           <div class="faq-a"><div class="faq-a-inner">Tak, 30 dni na zwrot bez podawania przyczyny. Napisz na kontakt@erykmastermind.pl — zwracamy 100% kwoty. Zakup jest bez ryzyka.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORE EBOOKS -->
+  <section class="section ebooks-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label">Wiecej wiedzy</div>
+        <h2>Poznaj pozostale e-booki</h2>
+        <p>Kazdy z nich rozwiazuje konkretny problem — i daje Ci przewage, ktorej inni nie maja.</p>
+      </div>
+
+      <div class="ebooks-grid">
+        <!-- Mroczna Psychologia -->
+        <div class="ebook-card">
+          <img src="cover-mroczna.jpg" alt="Mroczna Psychologia — okladka" class="ebook-card-img" loading="lazy" />
+          <div class="ebook-card-body">
+            <div class="ebook-card-tag red">Bestseller</div>
+            <h3>Mroczna Psychologia</h3>
+            <p>Jak rozpoznac manipulacje i obronic sie przed nia. 15 rozdzialow o gaslightingu, mrocznej triadzie, szantazu emocjonalnym i technikach obrony.</p>
+            <div class="ebook-card-footer">
+              <div class="ebook-price">39 <span>zl</span></div>
+              <a href="https://buy.stripe.com/3cIfZh6gp7h53wZfz0bjW02" class="ebook-btn">KUP TERAZ</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jak Czytac Ludzi -->
+        <div class="ebook-card">
+          <img src="cover-czytanie.jpg" alt="Jak Czytac Ludzi — okladka" class="ebook-card-img" loading="lazy" />
+          <div class="ebook-card-body">
+            <div class="ebook-card-tag blue">Nowość</div>
+            <h3>Jak Czytac Ludzi</h3>
+            <p>Przewodnik po jezyku ciala i ukrytych emocjach. Mikroekspresje, wykrywanie klamstw, mowa ciala w biznesie i relacjach — 15 praktycznych rozdzialow.</p>
+            <div class="ebook-card-footer">
+              <div class="ebook-price">39 <span>zl</span></div>
+              <a href="https://buy.stripe.com/00w28rfQZ58X2sVgD4bjW03" class="ebook-btn blue">KUP TERAZ</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
